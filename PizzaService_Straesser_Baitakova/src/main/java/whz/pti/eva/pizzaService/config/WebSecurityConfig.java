@@ -11,6 +11,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableGlobalMethodSecurity(prePostEnabled = true)
@@ -21,27 +22,34 @@ class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable();
+
         http
+                // add public available endpoints
                 .authorizeRequests()
-                .antMatchers("/signin","/signup","/css/**","/menu").permitAll()
+                .antMatchers("/signin","/signup", "/css/**", "/menu", "/h2-console/**")
+                .permitAll()
+
                 .anyRequest().authenticated()
+
+                // add and configure login form
                 .and()
                 .formLogin()
                 .loginPage("/signin")
                 .defaultSuccessUrl("/menu", true)
                 .failureUrl("/signin?error")
                 .usernameParameter("loginName")
-                .permitAll()
+
+                // add logout page
                 .and()
                 .logout()
-                .logoutSuccessUrl("/")
-                .invalidateHttpSession(true)
+                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                 .deleteCookies("JSESSIONID")
-                .logoutUrl("/logout")
-                .permitAll()
-                .and()
-                .rememberMe();
+                .invalidateHttpSession(true)
+                .logoutSuccessUrl("/logout.done");
+
+                
+        http.csrf().disable();
+        http.headers().frameOptions().disable();
     }
     
     @Bean
