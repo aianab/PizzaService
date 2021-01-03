@@ -88,8 +88,8 @@ public class Customer extends BaseEntity<Long>{
     public String toString() {
         return "Customer{" +
                 "id=" + getId() +
-                "firstName=" + firstName +
-                "lastName=" + lastName +
+                ", firstName=" + firstName +
+                ", lastName=" + lastName +
                 ", loginName='" + loginName +
                 ", password='" + password.substring(0, 10) +
                 ", role=" + role +

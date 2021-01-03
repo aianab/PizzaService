@@ -6,6 +6,8 @@ import java.util.Optional;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,14 +20,18 @@ import whz.pti.eva.pizzaService.order.domain.Ordered;
 import whz.pti.eva.pizzaService.order.domain.OrderedItem;
 import whz.pti.eva.pizzaService.order.service.OrderedItemService;
 import whz.pti.eva.pizzaService.order.service.OrderedService;
+import whz.pti.eva.pizzaService.pizza.boundary.PizzaController;
 import whz.pti.eva.pizzaService.pizza.domain.Item;
+import whz.pti.eva.pizzaService.security.service.customer.CustomerService;
 
 
 @Controller
 public class CartController {
+	private static final Logger log = LoggerFactory.getLogger(PizzaController.class);
 	private CartService cartService;
 	private OrderedService orderedService;
 	private OrderedItemService orderedItemService;
+	private CustomerService customerService;
 	@Autowired
 	 public CartController(CartService cartService, OrderedService orderedService, OrderedItemService orderedItemService) {
 		 this.cartService = cartService;

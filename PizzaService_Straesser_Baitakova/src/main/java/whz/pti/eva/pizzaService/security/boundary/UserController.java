@@ -14,6 +14,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import whz.pti.eva.pizzaService.cart.domain.Cart;
+import whz.pti.eva.pizzaService.cart.domain.CartRepository;
+import whz.pti.eva.pizzaService.cart.service.CartService;
 import whz.pti.eva.pizzaService.pizza.boundary.PizzaController;
 import whz.pti.eva.pizzaService.security.domain.Customer;
 import whz.pti.eva.pizzaService.security.domain.CustomerCreateForm;
@@ -26,12 +29,14 @@ import whz.pti.eva.pizzaService.security.service.validation.UserCreateFormValida
 public class UserController {
 	private static final Logger log = LoggerFactory.getLogger(PizzaController.class);
 	private CustomerService customerService;
+	private CartRepository cartRepository;
 	private UserCreateFormValidator userCreateFormValidator;
 	
 	@Autowired
-	public UserController(CustomerService customerService, UserCreateFormValidator userCreateFormValidator) {
+	public UserController(CustomerService customerService, UserCreateFormValidator userCreateFormValidator, CartRepository cartRepository) {
 		this.customerService = customerService;
 		this.userCreateFormValidator = userCreateFormValidator;
+		this.cartRepository = cartRepository;
 	}
 	
 	@InitBinder("myform")
@@ -51,11 +56,9 @@ public class UserController {
             model.addAttribute("error", bindingResult.getGlobalError().getDefaultMessage());
             return "signUp";
         }
-		
-		customerService.create(form); 
-		if(customerService.getCustomerByLoginName(form.getLoginName()).get().getRole()==null) {
-			customerService.getCustomerByLoginName(form.getLoginName()).get().setRole(Role.USER);
-		}
+		Customer customer = customerService.create(form); 
+		Cart cart = new Cart(customer);
+		cartRepository.save(cart);;
 		return "signIn";
 	}
 	
