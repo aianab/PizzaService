@@ -26,7 +26,12 @@ class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 // add public available endpoints
                 .authorizeRequests()
-                .antMatchers("/signin","/signup", "/css/**", "/menu", "/h2-console/**")
+                .antMatchers("/signin",
+                		"/signup", 
+                		"/css/**", 
+                		"/menu", 
+                		"/h2-console/**",
+                		 "/users/create")
                 .permitAll()
 
                 .anyRequest().authenticated()
