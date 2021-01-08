@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="de" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<head th:include="fragments/header :: head"></head>
+
+<body>
+
+	<div th:include="fragments/body :: headline (txt='deine nutzerdaten' )"></div>
+	<div class="container">
+		<h5>Balance replenishment </h5>
+		<form class="bs-example error" th:action="@{/deposit/amount}"
+			th:object="${replenishBalance}" method="post" role="form">
+			<input type="number"  min="1" step="1" name="amount" class="form-control"
+				placeholder="Enter the desired amount" required="required" autofocus="autofocus" >
+			<br>
+			<input type="submit" class="btn btn-outline-primary"
+				th:value="speichern" > 
+			
+		</form>
+	</div>
+<br>
+
+	<div th:include="fragments/footer :: footer"></div>
+</body>
+</html>

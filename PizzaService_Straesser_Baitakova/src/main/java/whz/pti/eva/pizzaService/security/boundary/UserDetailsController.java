@@ -25,4 +25,15 @@ public class UserDetailsController {
 		model.addAttribute("user", customerDTO);
 		return "profile";
 	}
+	
+	@RequestMapping(value = {"/refill"}, method = RequestMethod.GET)
+	public String getRefillPage(Model model) {
+		return "refill";
+	}
+	
+//	@RequestMapping(value = {"/deposit/amount"}, method = RequestMethod.POST)
+//	public String replenishBalance(Model model) {
+//		return "profile";
+//	}
+	
 }
