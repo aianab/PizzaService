@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="de" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<head th:include="fragments/header :: head"></head>
+
+<body>
+
+	<div th:include="fragments/body :: headline (txt='deine nutzerdaten' )"></div>
+	
+	<div class="container">
+			<h5>Balance:</h5>
+			<form th:action="@{/upload}" method="get">
+				<input type="submit" class="btn btn-outline-primary" value="Replenish">		
+			</form>
+	</div>
+	<br>
+	<div class="container">
+		<!-- <table class="table table-hover table-bordered table-fixed"> -->
+		<table class="table table-hover table-bordered table-sm">
+			<thead class="thead-light">
+				<tr>
+					<th scope="col">Profile details</th>
+					<th scope="col"></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>First name</td>
+					<td th:text="${user.firstName}">name</td>
+				</tr>
+				<tr>
+					<td>Last name</td>
+					<td th:text="${user.lastName}">lastname</td>
+				</tr>
+				<tr>
+					<td>Nickname</td>
+					<td th:text="${user.loginName}">login</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+
+	<div th:include="fragments/footer :: footer"></div>
+</body>
+</html>
