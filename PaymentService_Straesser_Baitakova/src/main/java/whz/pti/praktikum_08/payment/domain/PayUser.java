@@ -18,7 +18,7 @@ public class PayUser extends BaseEntity<Long> {
         account = new Account();
     }
 
-    public PayUser(String loginName, String userId) {
+    public PayUser (String userId, String loginName) {
         account = new Account();
         this.loginName = loginName;
         this.userId = userId;

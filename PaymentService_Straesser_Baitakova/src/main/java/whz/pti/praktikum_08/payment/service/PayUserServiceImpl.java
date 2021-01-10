@@ -38,8 +38,8 @@ public class PayUserServiceImpl implements PayUserService {
 
 
     @Override
-    public void openAccount(String userId) {
-        PayUser payUser = payUserRepository.findByLoginName(userId).orElse(new PayUser(userId));
+    public void openAccount(String userId, String loginName) {
+        PayUser payUser = payUserRepository.findByUserId(userId).orElse(new PayUser(userId, loginName));
         payUserRepository.save(payUser);
     }
 
