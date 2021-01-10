@@ -25,7 +25,7 @@ public class PayUserServiceImpl implements PayUserService {
     private PayUserRepository payUserRepository;
 
     @Override
-    public int getAccountBalanceByLoginName(String userId) {
+    public int getAccountBalanceByUserId(String userId) {
         PayUser payUser = null;
         try {
             payUser = payUserRepository.findByLoginName(userId).orElseThrow(() -> new PayUserException("user cannot be found"));

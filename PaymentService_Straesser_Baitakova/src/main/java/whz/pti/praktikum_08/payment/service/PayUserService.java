@@ -3,7 +3,7 @@ package whz.pti.praktikum_08.payment.service;
 import whz.pti.praktikum_08.payment.domain.PayUser;
 
 public interface PayUserService {
-    int getAccountBalanceByLoginName(String userId);
+    int getAccountBalanceByUserId(String userId);
 
 //    boolean containsAndAvailable(String userId);
 
