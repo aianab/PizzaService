@@ -31,7 +31,8 @@ class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 		"/css/**", 
                 		"/menu", 
                 		"/h2-console/**",
-                		 "/users/create")
+                		 "/users/create",
+                		 "/")
                 .permitAll()
 
                 .anyRequest().authenticated()

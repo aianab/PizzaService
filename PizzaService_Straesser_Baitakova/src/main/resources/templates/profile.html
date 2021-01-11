@@ -7,14 +7,6 @@
 <body>
 
 	<div th:include="fragments/body :: headline (txt='deine nutzerdaten' )"></div>
-	
-	<div class="container">
-			<h5>Balance:</h5>
-			<form th:action="@{/refill}" method="get">
-				<input type="submit" class="btn btn-outline-primary" value="Replenish">		
-			</form>
-	</div>
-	<br>
 	<div class="container">
 		<!-- <table class="table table-hover table-bordered table-fixed"> -->
 		<table class="table table-hover table-bordered table-sm">
