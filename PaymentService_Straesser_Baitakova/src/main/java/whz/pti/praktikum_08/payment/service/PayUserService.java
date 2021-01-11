@@ -9,7 +9,7 @@ public interface PayUserService {
 
 //    State getState(String userId);
 
-    void openAccount(String userId, String loginName);
+    String openAccount(String userId, String loginName);
 
     String uploadMoney(String userId, int amount) throws PayUserException;
 
